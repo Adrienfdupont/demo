@@ -16,27 +16,27 @@ public class DistributionController {
     DistributionService distributionService;
 
     @PostMapping
-    public void createDistribution(@RequestBody Distribution distribution) {
+    public void create(@RequestBody Distribution distribution) {
         distributionService.create(distribution);
     }
 
     @GetMapping
-    public List<Distribution> getAllDistributions() {
+    public List<Distribution> findAll() {
         return distributionService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Distribution getDistributionById(@PathVariable Long id) {
+    public Distribution findOne(@PathVariable Long id) {
         return distributionService.findOne(id);
     }
 
     @PutMapping
-    public void updateDistribution (@RequestBody Distribution distribution) {
+    public void update (@RequestBody Distribution distribution) {
         distributionService.update(distribution);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDistribution(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         distributionService.delete(id);
     }
 

@@ -29,6 +29,7 @@ public class DistributionService {
 
         if (distribution != null) {
             distribution.setName(newDistribution.getName());
+            distribution.setDescription(newDistribution.getDescription());
             distributionRepository.save(distribution);
         }
     }
