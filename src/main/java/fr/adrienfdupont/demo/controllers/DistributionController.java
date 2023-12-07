@@ -18,11 +18,16 @@ public class DistributionController {
     @Autowired
     DistributionService distributionService;
 
+    @Autowired
+    CategoryService categoryService;
+
     @PostMapping
     public void create(@RequestBody CreateDistributionDto createDistributionDto) {
         Distribution distribution = new Distribution();
+        Category category = categoryService.findOne(createDistributionDto.getCategory_id());
         distribution.setName(createDistributionDto.getName());
         distribution.setDescription(createDistributionDto.getDescription());
+        distribution.setCategory(category);
         distributionService.create(distribution);
     }
 
@@ -39,8 +44,10 @@ public class DistributionController {
     @PutMapping
     public void update (@RequestBody UpdateDistributionDto updateDistributionDto) {
         Distribution distribution = distributionService.findOne(updateDistributionDto.getId());
+        Category category = categoryService.findOne(updateDistributionDto.getCategory_id());
         distribution.setName(updateDistributionDto.getName());
         distribution.setDescription(updateDistributionDto.getDescription());
+        distribution.setCategory(category);
         distributionService.update(distribution);
     }
 
