@@ -16,6 +16,7 @@ public class Distribution {
 
     private String name;
 
+    @Column(columnDefinition = "text")
     private String description;
 
 }
