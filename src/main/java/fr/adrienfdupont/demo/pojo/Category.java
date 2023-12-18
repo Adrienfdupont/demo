@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -12,11 +13,13 @@ import java.util.List;
 @Getter
 public class Category {
     @Id
+    @Column(name="category_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Distribution> distributions;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "category_id")
+    private Set<Distribution> distributions = new LinkedHashSet<>();
 }
