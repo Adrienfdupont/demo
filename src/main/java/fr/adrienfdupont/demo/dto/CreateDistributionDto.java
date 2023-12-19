@@ -5,6 +5,8 @@ public class CreateDistributionDto {
 
     private String description;
 
+    private Long category_id;
+
     public String getName() {
         return name;
     }
@@ -19,5 +21,13 @@ public class CreateDistributionDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
     }
 }

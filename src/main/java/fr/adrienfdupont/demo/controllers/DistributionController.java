@@ -18,12 +18,20 @@ public class DistributionController {
     @Autowired
     DistributionService distributionService;
 
+    @Autowired
+    CategoryService categoryService;
+
     @PostMapping
     public void create(@RequestBody CreateDistributionDto createDistributionDto) {
         Distribution distribution = new Distribution();
         distribution.setName(createDistributionDto.getName());
         distribution.setDescription(createDistributionDto.getDescription());
-        distributionService.create(distribution);
+
+        Category category = categoryService.findOne(createDistributionDto.getCategory_id());
+        if (category != null) {
+            category.getDistributions().add(distribution);
+            categoryService.create(category);
+        }
     }
 
     @GetMapping
