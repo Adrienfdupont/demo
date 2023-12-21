@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin()
 @RequestMapping( "/api/categories")
 public class CategoryController {
 
@@ -18,10 +19,10 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping
-    public void create(@RequestBody CreateCategoryDto createCategoryDto) {
+    public Category create(@RequestBody CreateCategoryDto createCategoryDto) {
         Category category = new Category();
         category.setName(createCategoryDto.getName());
-        categoryService.create(category);
+        return categoryService.create(category);
     }
 
     @GetMapping
@@ -35,10 +36,10 @@ public class CategoryController {
     }
 
     @PutMapping
-    public void update (@RequestBody UpdateCategoryDto updateCategoryDto) {
+    public Category update (@RequestBody UpdateCategoryDto updateCategoryDto) {
         Category category = categoryService.findOne(updateCategoryDto.getId());
         category.setName(updateCategoryDto.getName());
-        categoryService.update(category);
+        return categoryService.update(category);
     }
 
     @DeleteMapping("/{id}")

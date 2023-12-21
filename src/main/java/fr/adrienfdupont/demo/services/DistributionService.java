@@ -12,8 +12,8 @@ public class DistributionService {
     @Autowired
     private DistributionRepository distributionRepository;
 
-    public void create(Distribution distribution) {
-        distributionRepository.save(distribution);
+    public Distribution create(Distribution distribution) {
+        return distributionRepository.save(distribution);
     }
 
     public List<Distribution> findAll() {

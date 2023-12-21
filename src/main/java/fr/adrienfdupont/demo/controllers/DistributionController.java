@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin()
 @RequestMapping("/api/distributions")
 public class DistributionController {
 
@@ -22,16 +23,17 @@ public class DistributionController {
     CategoryService categoryService;
 
     @PostMapping
-    public void create(@RequestBody CreateDistributionDto createDistributionDto) {
+    public Distribution create(@RequestBody CreateDistributionDto createDistributionDto) {
         Distribution distribution = new Distribution();
         distribution.setName(createDistributionDto.getName());
         distribution.setDescription(createDistributionDto.getDescription());
 
-        Category category = categoryService.findOne(createDistributionDto.getCategory_id());
+        Category category = categoryService.findOne(createDistributionDto.getCategoryId());
         if (category != null) {
             category.getDistributions().add(distribution);
             categoryService.create(category);
         }
+        return distribution;
     }
 
     @GetMapping

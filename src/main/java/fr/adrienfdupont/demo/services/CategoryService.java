@@ -12,8 +12,8 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public void create(Category category) {
-        categoryRepository.save(category);
+    public Category create(Category category) {
+        return categoryRepository.save(category);
     }
 
     public List<Category> findAll() {
@@ -24,13 +24,14 @@ public class CategoryService {
         return categoryRepository.findById(id).orElse(null);
     }
 
-    public void update(Category newCategory) {
+    public Category update(Category newCategory) {
         Category category = this.findOne(newCategory.getId());
 
         if (category != null) {
             category.setName(newCategory.getName());
             categoryRepository.save(category);
         }
+        return category;
     }
 
     public void delete(Long id) {
